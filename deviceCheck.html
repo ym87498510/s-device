@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=no">
+    <title>版本检测</title>
+</head>
+<body>
+	<script type="text/javascript">
+		!function() {
+			var ua = navigator.userAgent
+			console.log(ua)
+			var isIos = !!ua.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/)
+			var isAndroid = ua.indexOf('Android') > -1 || ua.indexOf('Linux') > -1
+			var system = isIos ? 'iOS' : isAndroid ? 'Android' : 'Unknow System'
+			var model = 'Unknow Model'
+			if (isIos) {
+			    model = ua.match(/(?<=CPU\s).*?(?=like)/)[0]
+			} else if (isAndroid) {
+			    model = ua.match(/(?<=(Linux;\s)).*?(?=\s?Build)/)[0]
+			}
+			var isWechat = !!navigator.userAgent.match(/MicroMessenger/i)
+			document.write(`<h3>手机系统是：${system}</h3></br><h3>版本信息为：${model}</h3>`)
+			window.sDevice = {
+				system: system,
+				model: model,
+				isAndroid: isAndroid,
+				isIos: isIos,
+				isWechat: isWechat
+			}
+		}()
+	</script>
+</body>
+</html>
